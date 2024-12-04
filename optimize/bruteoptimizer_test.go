@@ -20,7 +20,7 @@ func TestBruteOptimizer_Prepare(t *testing.T) {
 	tests := []struct {
 		name               string
 		giveParamRange     ParamMap
-		giveSamples        map[AssetID][]market.Kline
+		giveSamples        map[AssetId][]market.Kline
 		giveSampleSplitPct float64
 		wantSteps          int
 		wantStudy          Study
@@ -28,9 +28,9 @@ func TestBruteOptimizer_Prepare(t *testing.T) {
 		{
 			name:           "ok",
 			giveParamRange: map[string]any{"A": []any{1, 2}, "B": []any{10}},
-			giveSamples: map[AssetID][]market.Kline{
-				AssetID("asset_x"): {{C: dec.New(10)}, {C: dec.New(20)}, {C: dec.New(30)}, {C: dec.New(40)}},
-				AssetID("asset_y"): {{C: dec.New(50)}, {C: dec.New(60)}, {C: dec.New(70)}},
+			giveSamples: map[AssetId][]market.Kline{
+				AssetId("asset_x"): {{C: dec.New(10)}, {C: dec.New(20)}, {C: dec.New(30)}, {C: dec.New(40)}},
+				AssetId("asset_y"): {{C: dec.New(50)}, {C: dec.New(60)}, {C: dec.New(70)}},
 			},
 			giveSampleSplitPct: 0.5,
 			wantSteps:          6,
@@ -39,13 +39,13 @@ func TestBruteOptimizer_Prepare(t *testing.T) {
 					{Params: map[string]any{"A": 1, "B": 10}},
 					{Params: map[string]any{"A": 2, "B": 10}},
 				},
-				TrainingSamples: map[AssetID][]market.Kline{
-					AssetID("asset_x"): {{C: dec.New(10)}, {C: dec.New(20)}},
-					AssetID("asset_y"): {{C: dec.New(50)}, {C: dec.New(60)}},
+				TrainingSamples: map[AssetId][]market.Kline{
+					AssetId("asset_x"): {{C: dec.New(10)}, {C: dec.New(20)}},
+					AssetId("asset_y"): {{C: dec.New(50)}, {C: dec.New(60)}},
 				},
-				ValidationSamples: map[AssetID][]market.Kline{
-					AssetID("asset_x"): {{C: dec.New(30)}},
-					AssetID("asset_y"): {{C: dec.New(60)}},
+				ValidationSamples: map[AssetId][]market.Kline{
+					AssetId("asset_x"): {{C: dec.New(30)}},
+					AssetId("asset_y"): {{C: dec.New(60)}},
 				},
 			},
 		},
@@ -73,28 +73,28 @@ func TestBruteOptimizer_Start(t *testing.T) {
 			name: "select top ranked pset for validation",
 			giveStudy: &Study{
 				Training: []ParamSet{
-					{ID: "1", Params: map[string]any{"A": 1, "B": 10}},
-					{ID: "2", Params: map[string]any{"A": 2, "B": 10}},
+					{Id: "1", Params: map[string]any{"A": 1, "B": 10}},
+					{Id: "2", Params: map[string]any{"A": 2, "B": 10}},
 				},
-				TrainingResults: map[ParamSetID]PhaseReport{
-					"1": {PRR: 2, RoundTurnCount: 2, Subject: ParamSet{ID: "1", Params: map[string]any{"A": 1, "B": 10}}},
-					"2": {PRR: 4, RoundTurnCount: 2, Subject: ParamSet{ID: "2", Params: map[string]any{"A": 2, "B": 10}}},
+				TrainingResults: map[ParamSetId]PhaseReport{
+					"1": {PRR: 2, RoundTurnCount: 2, Subject: ParamSet{Id: "1", Params: map[string]any{"A": 1, "B": 10}}},
+					"2": {PRR: 4, RoundTurnCount: 2, Subject: ParamSet{Id: "2", Params: map[string]any{"A": 2, "B": 10}}},
 				},
-				ValidationResults: make(map[ParamSetID]PhaseReport),
+				ValidationResults: make(map[ParamSetId]PhaseReport),
 			},
 			wantStudy: &Study{
 				Training: []ParamSet{
-					{ID: "1", Params: map[string]any{"A": 1, "B": 10}},
-					{ID: "2", Params: map[string]any{"A": 2, "B": 10}},
+					{Id: "1", Params: map[string]any{"A": 1, "B": 10}},
+					{Id: "2", Params: map[string]any{"A": 2, "B": 10}},
 				},
-				TrainingResults: map[ParamSetID]PhaseReport{
-					"1": {PRR: 2, RoundTurnCount: 2, Subject: ParamSet{ID: "1", Params: map[string]any{"A": 1, "B": 10}}},
-					"2": {PRR: 4, RoundTurnCount: 2, Subject: ParamSet{ID: "2", Params: map[string]any{"A": 2, "B": 10}}},
+				TrainingResults: map[ParamSetId]PhaseReport{
+					"1": {PRR: 2, RoundTurnCount: 2, Subject: ParamSet{Id: "1", Params: map[string]any{"A": 1, "B": 10}}},
+					"2": {PRR: 4, RoundTurnCount: 2, Subject: ParamSet{Id: "2", Params: map[string]any{"A": 2, "B": 10}}},
 				},
 				Validation: []ParamSet{
-					{ID: "2", Params: map[string]any{"A": 2, "B": 10}},
+					{Id: "2", Params: map[string]any{"A": 2, "B": 10}},
 				},
-				ValidationResults: map[ParamSetID]PhaseReport{
+				ValidationResults: map[ParamSetId]PhaseReport{
 					"2": {},
 				},
 			},
@@ -122,10 +122,10 @@ func TestBruteOptimizer_Start(t *testing.T) {
 func TestBruteOptimizer_enqueueJobs(t *testing.T) {
 
 	givePSets := []ParamSet{
-		{ID: "0", Params: map[string]any{"A": 0, "B": 1}},
-		{ID: "1", Params: map[string]any{"Y": 25, "Z": 26}},
+		{Id: "0", Params: map[string]any{"A": 0, "B": 1}},
+		{Id: "1", Params: map[string]any{"Y": 25, "Z": 26}},
 	}
-	giveSamples := map[AssetID][]market.Kline{
+	giveSamples := map[AssetId][]market.Kline{
 		"asset_x": {{C: dec.New(10)}, {C: dec.New(20)}},
 		"asset_y": {{C: dec.New(30)}, {C: dec.New(40)}, {C: dec.New(50)}},
 	}
@@ -149,18 +149,18 @@ func TestProcessBruteJobs(t *testing.T) {
 	outChan := processBruteJobs(context.Background(), giveDoneCh, giveJobCh, 8)
 
 	giveJobCh <- bruteOptimizerJob{
-		ParamSet: ParamSet{ID: "0", Params: map[string]any{"A": 0, "B": 1}},
+		ParamSet: ParamSet{Id: "0", Params: map[string]any{"A": 0, "B": 1}},
 		Sample:   giveSample, WarmupBarCount: 3, MakeBot: giveMakeBot, MakeDealer: giveMakeDealer,
 	}
 	giveJobCh <- bruteOptimizerJob{
-		ParamSet: ParamSet{ID: "1", Params: map[string]any{"Y": 25, "Z": 26}},
+		ParamSet: ParamSet{Id: "1", Params: map[string]any{"Y": 25, "Z": 26}},
 		Sample:   giveSample, WarmupBarCount: 3, MakeBot: giveMakeBot, MakeDealer: giveMakeDealer,
 	}
 	close(giveJobCh)
 
 	want := []OptimizerTrial{
-		{PSet: ParamSet{ID: "0", Params: map[string]any{"A": 0, "B": 1}}},
-		{PSet: ParamSet{ID: "1", Params: map[string]any{"Y": 25, "Z": 26}}},
+		{PSet: ParamSet{Id: "0", Params: map[string]any{"A": 0, "B": 1}}},
+		{PSet: ParamSet{Id: "1", Params: map[string]any{"Y": 25, "Z": 26}}},
 	}
 
 	var act []OptimizerTrial

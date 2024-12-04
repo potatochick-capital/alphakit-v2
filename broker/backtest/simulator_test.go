@@ -149,7 +149,7 @@ func TestSimulator_processOrder(t *testing.T) {
 func TestSimulator_openOrder(t *testing.T) {
 	sim := newSimulatorForTest()
 	exp := broker.Order{
-		ID:       broker.NewIDWithTime(_fixed),
+		Id:       broker.NewIdWithTime(_fixed),
 		OpenedAt: _fixed,
 	}
 	act := sim.openOrder(broker.Order{})
@@ -194,14 +194,14 @@ func TestSimulator_getPosition(t *testing.T) {
 		{
 			name: "latest position is closed",
 			give: []broker.Position{
-				{ID: "1", OpenedAt: _fixed},
-				{ID: "2", ClosedAt: _fixed},
+				{Id: "1", OpenedAt: _fixed},
+				{Id: "2", ClosedAt: _fixed},
 			},
 			want: broker.PositionPending,
 		},
 		{
 			name: "latest position is open",
-			give: []broker.Position{{ID: "1", OpenedAt: _fixed}},
+			give: []broker.Position{{Id: "1", OpenedAt: _fixed}},
 			want: broker.PositionOpen,
 		},
 	}
@@ -226,10 +226,10 @@ func TestSimulator_processPosition(t *testing.T) {
 	}{
 		{
 			name:         "open new position",
-			giveOrder:    broker.Order{ID: "1", Side: broker.Buy, FilledAt: _fixed, FilledPrice: dec.New(10), FilledSize: dec.New(1)},
+			giveOrder:    broker.Order{Id: "1", Side: broker.Buy, FilledAt: _fixed, FilledPrice: dec.New(10), FilledSize: dec.New(1)},
 			givePosition: broker.Position{},
 			wantPosition: broker.Position{
-				ID:         "1",
+				Id:         "1",
 				OpenedAt:   _fixed,
 				Side:       broker.Buy,
 				EntryPrice: dec.New(10),
@@ -242,10 +242,10 @@ func TestSimulator_processPosition(t *testing.T) {
 		},
 		{
 			name:         "close existing position",
-			giveOrder:    broker.Order{ID: "2", FilledAt: _fixed, Side: broker.Sell, FilledPrice: dec.New(20), FilledSize: dec.New(1)},
-			givePosition: broker.Position{ID: "1", OpenedAt: _fixed, Side: broker.Buy, Cost: dec.New(10), EntryPrice: dec.New(10), Size: dec.New(1)},
+			giveOrder:    broker.Order{Id: "2", FilledAt: _fixed, Side: broker.Sell, FilledPrice: dec.New(20), FilledSize: dec.New(1)},
+			givePosition: broker.Position{Id: "1", OpenedAt: _fixed, Side: broker.Buy, Cost: dec.New(10), EntryPrice: dec.New(10), Size: dec.New(1)},
 			wantPosition: broker.Position{
-				ID:         "1",
+				Id:         "1",
 				OpenedAt:   _fixed,
 				ClosedAt:   _fixed,
 				Side:       broker.Buy,
@@ -262,10 +262,10 @@ func TestSimulator_processPosition(t *testing.T) {
 		},
 		{
 			name:         "adjust open position",
-			giveOrder:    broker.Order{ID: "2", FilledAt: _fixed, Side: broker.Buy, FilledPrice: dec.New(20), FilledSize: dec.New(2)},
-			givePosition: broker.Position{ID: "1", OpenedAt: _fixed, Side: broker.Buy, Cost: dec.New(10), EntryPrice: dec.New(10), Size: dec.New(1)},
+			giveOrder:    broker.Order{Id: "2", FilledAt: _fixed, Side: broker.Buy, FilledPrice: dec.New(20), FilledSize: dec.New(2)},
+			givePosition: broker.Position{Id: "1", OpenedAt: _fixed, Side: broker.Buy, Cost: dec.New(10), EntryPrice: dec.New(10), Size: dec.New(1)},
 			wantPosition: broker.Position{
-				ID:         "1",
+				Id:         "1",
 				OpenedAt:   _fixed,
 				Side:       broker.Buy,
 				EntryPrice: dec.New(16.66),
@@ -278,7 +278,7 @@ func TestSimulator_processPosition(t *testing.T) {
 		},
 		{
 			name:         "failed to open new position with reduce-only order",
-			giveOrder:    broker.Order{ID: "1", ReduceOnly: true, FilledAt: _fixed, Side: broker.Buy, FilledPrice: dec.New(20), FilledSize: dec.New(2)},
+			giveOrder:    broker.Order{Id: "1", ReduceOnly: true, FilledAt: _fixed, Side: broker.Buy, FilledPrice: dec.New(20), FilledSize: dec.New(2)},
 			givePosition: broker.Position{},
 			wantPosition: broker.Position{},
 			wantState:    broker.PositionPending,
@@ -302,7 +302,7 @@ func TestSimulator_openPosition(t *testing.T) {
 	sim.marketPrice = market.Kline{C: dec.New(10)}
 
 	exp := broker.Position{
-		ID:         "1",
+		Id:         "1",
 		OpenedAt:   _fixed,
 		Asset:      market.NewAsset("BTCUSD"),
 		Side:       broker.Buy,
@@ -313,7 +313,7 @@ func TestSimulator_openPosition(t *testing.T) {
 	}
 
 	act := sim.openPosition(broker.Order{
-		ID:          exp.ID,
+		Id:          exp.Id,
 		FilledAt:    _fixed,
 		Asset:       exp.Asset,
 		Side:        exp.Side,
@@ -329,9 +329,9 @@ func TestSimulator_ReceivePrice(t *testing.T) {
 	sim := NewSimulator()
 	sim.clock.Start(time.Now(), time.Millisecond)
 	sim.orders = make([]broker.Order, 3)
-	sim.orders[0] = broker.Order{ID: "0", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(15), Size: dec.New(1), OpenedAt: sim.clock.Now()}
-	sim.orders[1] = broker.Order{ID: "1", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(15), Size: dec.New(1), OpenedAt: sim.clock.Now()}
-	sim.orders[2] = broker.Order{ID: "2", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(10), Size: dec.New(1), OpenedAt: sim.clock.Now()}
+	sim.orders[0] = broker.Order{Id: "0", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(15), Size: dec.New(1), OpenedAt: sim.clock.Now()}
+	sim.orders[1] = broker.Order{Id: "1", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(15), Size: dec.New(1), OpenedAt: sim.clock.Now()}
+	sim.orders[2] = broker.Order{Id: "2", Side: broker.Buy, Type: broker.Limit, LimitPrice: dec.New(10), Size: dec.New(1), OpenedAt: sim.clock.Now()}
 
 	price := market.Kline{
 		Start: sim.clock.Now().Add(time.Hour * 1),
@@ -353,14 +353,14 @@ func TestSimulator_ReceivePrice(t *testing.T) {
 
 func TestSimulator_CancelOrders(t *testing.T) {
 	giveOrders := []broker.Order{
-		{ID: "1", OpenedAt: _fixed},
-		{ID: "2", OpenedAt: _fixed, ClosedAt: _fixed},
-		{ID: "3", OpenedAt: _fixed},
+		{Id: "1", OpenedAt: _fixed},
+		{Id: "2", OpenedAt: _fixed, ClosedAt: _fixed},
+		{Id: "3", OpenedAt: _fixed},
 	}
 
 	want := []broker.Order{
-		{ID: "1", OpenedAt: _fixed, ClosedAt: _fixed},
-		{ID: "3", OpenedAt: _fixed, ClosedAt: _fixed},
+		{Id: "1", OpenedAt: _fixed, ClosedAt: _fixed},
+		{Id: "3", OpenedAt: _fixed, ClosedAt: _fixed},
 	}
 
 	sim := newSimulatorForTest()
@@ -501,7 +501,7 @@ func TestSimulator_createRoundTurn(t *testing.T) {
 	sim := newSimulatorForTest()
 
 	give := broker.Position{
-		ID:         "1",
+		Id:         "1",
 		OpenedAt:   _fixed,
 		ClosedAt:   _fixed.Add(2 * time.Hour),
 		Asset:      market.NewAsset("BTCUSD"),
@@ -513,7 +513,7 @@ func TestSimulator_createRoundTurn(t *testing.T) {
 	}
 
 	want := broker.RoundTurn{
-		ID:         give.ID,
+		Id:         give.Id,
 		CreatedAt:  give.ClosedAt,
 		Asset:      give.Asset,
 		Side:       give.Side,

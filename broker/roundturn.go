@@ -12,7 +12,7 @@ import (
 
 // RoundTurn is the result of opening and closing a position aka round-trip.
 type RoundTurn struct {
-	ID         DealID          `csv:"id"`
+	Id         DealId          `csv:"id"`
 	CreatedAt  time.Time       `csv:"created_at"`
 	Asset      market.Asset    `csv:",inline"`
 	Side       OrderSide       `csv:"side"`

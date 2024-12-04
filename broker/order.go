@@ -84,7 +84,7 @@ func (s OrderState) String() string {
 
 // Order represents an order to be placed using a dealer.
 type Order struct {
-	ID       DealID
+	Id       DealId
 	OpenedAt time.Time
 	FilledAt time.Time
 	ClosedAt time.Time

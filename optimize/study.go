@@ -27,37 +27,37 @@ import (
 //
 // - Method: as defined by the Optimizer implementation (e.g. brute force, genetic et al) and its ObjectiveRanker func.
 type Study struct {
-	ID string
+	Id string
 
 	Training        []ParamSet
-	TrainingSamples map[AssetID][]market.Kline
-	TrainingResults map[ParamSetID]PhaseReport
+	TrainingSamples map[AssetId][]market.Kline
+	TrainingResults map[ParamSetId]PhaseReport
 
 	Validation        []ParamSet
-	ValidationSamples map[AssetID][]market.Kline
-	ValidationResults map[ParamSetID]PhaseReport
+	ValidationSamples map[AssetId][]market.Kline
+	ValidationResults map[ParamSetId]PhaseReport
 }
 
 // NewStudy returns a new study.
 // Use an Optimizer implementation to prepare and execute the study.
 func NewStudy() *Study {
 	return &Study{
-		ID:                string(id.New()),
-		TrainingSamples:   make(map[AssetID][]market.Kline),
-		TrainingResults:   make(map[ParamSetID]PhaseReport),
-		ValidationSamples: make(map[AssetID][]market.Kline),
-		ValidationResults: make(map[ParamSetID]PhaseReport),
+		Id:                string(id.New()),
+		TrainingSamples:   make(map[AssetId][]market.Kline),
+		TrainingResults:   make(map[ParamSetId]PhaseReport),
+		ValidationSamples: make(map[AssetId][]market.Kline),
+		ValidationResults: make(map[ParamSetId]PhaseReport),
 	}
 }
 
-// AssetID is a string identifer for the asset associated with a sample.
+// AssetId is a string identifer for the asset associated with a sample.
 // Typically the symbol of the asset, e.g. btcusdt.
-type AssetID string
+type AssetId string
 
 // PhaseReport is the aggregated performance of a ParamSet across one or more price samples (trials)
 // The summary method is owned by the Optimizer implementation, but will typically be the mean (avg) of the individual trials.
 type PhaseReport struct {
-	ID      string   `csv:"id"`
+	Id      string   `csv:"id"`
 	Phase   Phase    `csv:"phase"`
 	Subject ParamSet `csv:"paramset_,inline"`
 
@@ -78,10 +78,10 @@ type PhaseReport struct {
 	Trials []perf.PerformanceReport `csv:"-"`
 }
 
-// NewReport returns a new empty report with an initialized ID.
+// NewReport returns a new empty report with an initialized .
 func NewReport() PhaseReport {
 	return PhaseReport{
-		ID: string(id.New()),
+		Id: string(id.New()),
 	}
 }
 

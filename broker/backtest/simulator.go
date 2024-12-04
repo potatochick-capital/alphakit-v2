@@ -217,7 +217,7 @@ func (s *Simulator) processOrder(order broker.Order) (broker.Order, error) {
 }
 
 func (s *Simulator) openOrder(order broker.Order) broker.Order {
-	order.ID = broker.NewIDWithTime(s.clock.Now())
+	order.Id = broker.NewIdWithTime(s.clock.Now())
 	order.OpenedAt = s.clock.Now()
 	return order
 }
@@ -265,7 +265,7 @@ func (s *Simulator) upsertPosition(position broker.Position) {
 		return
 	}
 	last := s.positions[len(s.positions)-1]
-	if position.ID == last.ID {
+	if position.Id == last.Id {
 		s.positions[len(s.positions)-1] = position
 		return
 	}
@@ -295,7 +295,7 @@ func (s *Simulator) processPosition(position broker.Position, order broker.Order
 
 		// State transition condition:
 		// If processing the order that opened the position then do not attempt to close position
-		if order.ID == position.ID {
+		if order.Id == position.Id {
 			break
 		}
 
@@ -331,7 +331,7 @@ func (s *Simulator) processPosition(position broker.Position, order broker.Order
 
 func (s *Simulator) openPosition(order broker.Order) broker.Position {
 	position := broker.Position{
-		ID:       order.ID,
+		Id:       order.Id,
 		OpenedAt: order.FilledAt,
 		Asset:    order.Asset,
 		Side:     order.Side,
@@ -368,7 +368,7 @@ func (s *Simulator) closePosition(position broker.Position, order broker.Order) 
 
 func (s *Simulator) createRoundTurn(position broker.Position) broker.RoundTurn {
 	return broker.RoundTurn{
-		ID:         position.ID,
+		Id:         position.Id,
 		CreatedAt:  position.ClosedAt,
 		Asset:      position.Asset,
 		Side:       position.Side,

@@ -30,7 +30,7 @@ func (s PositionState) String() string {
 
 // Position represents a position in a market for a given asset.
 type Position struct {
-	ID       DealID
+	Id       DealId
 	OpenedAt time.Time
 	ClosedAt time.Time
 	Asset    market.Asset

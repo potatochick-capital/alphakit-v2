@@ -14,13 +14,13 @@ import (
 )
 
 // readPricesFromConfig reads the price samples from a config file params.
-func readPricesFromConfig(config map[string]any, typeRegistry map[string]any) (map[optimize.AssetID][]market.Kline, error) {
+func readPricesFromConfig(config map[string]any, typeRegistry map[string]any) (map[optimize.AssetId][]market.Kline, error) {
 
 	if _, ok := config["samples"]; !ok {
 		return nil, errors.New("'samples' key not found")
 	}
 	root := config["samples"].([]any)
-	samples := make(map[optimize.AssetID][]market.Kline)
+	samples := make(map[optimize.AssetId][]market.Kline)
 
 	for _, sub := range root {
 
@@ -44,8 +44,8 @@ func readPricesFromConfig(config map[string]any, typeRegistry map[string]any) (m
 		}
 
 		// Load asset key from config
-		assetID := optimize.AssetID(cfg["asset"].(string))
-		samples[assetID] = series
+		assetId := optimize.AssetId(cfg["asset"].(string))
+		samples[assetId] = series
 	}
 
 	return samples, nil

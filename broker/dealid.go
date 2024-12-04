@@ -9,15 +9,15 @@ import (
 	"github.com/thecolngroup/gou/id"
 )
 
-// DealID is a unique identifier for a dealer data entity.
-type DealID string
+// DealId is a unique identifier for a dealer data entity.
+type DealId string
 
-// NewID returns a new DealID seeded with the current time.
-func NewID() DealID {
-	return DealID(id.New())
+// NewId returns a new Deal seeded with the current time.
+func NewId() DealId {
+	return DealId(id.New())
 }
 
-// NewIDWithTime returns a new DealID seeded with the given time.
-func NewIDWithTime(t time.Time) DealID {
-	return DealID(id.NewWithTime(t))
+// NewIdWithTime returns a new Deal seeded with the given time.
+func NewIdWithTime(t time.Time) DealId {
+	return DealId(id.NewWithTime(t))
 }

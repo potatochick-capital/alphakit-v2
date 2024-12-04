@@ -278,15 +278,15 @@ func TestBot_signal(t *testing.T) {
 func TestBot_getOpenPosition(t *testing.T) {
 	fixed := time.Date(2022, time.January, 01, 0, 0, 0, 0, time.Local)
 	givePositions := []broker.Position{
-		{ID: "1", OpenedAt: fixed, Side: broker.Buy},
-		{ID: "2", OpenedAt: fixed, Side: broker.Sell},
-		{ID: "3", OpenedAt: fixed, ClosedAt: time.Now(), Side: broker.Buy},
+		{Id: "1", OpenedAt: fixed, Side: broker.Buy},
+		{Id: "2", OpenedAt: fixed, Side: broker.Sell},
+		{Id: "3", OpenedAt: fixed, ClosedAt: time.Now(), Side: broker.Buy},
 	}
 	var dealer broker.MockDealer
 	dealer.On("ListPositions", context.Background(), (*web.ListOpts)(nil)).Return(givePositions, (*web.Response)(nil), nil)
 
 	giveSide := broker.Sell
-	want := broker.Position{ID: "2", OpenedAt: fixed, Side: broker.Sell}
+	want := broker.Position{Id: "2", OpenedAt: fixed, Side: broker.Sell}
 
 	bot := Bot{dealer: &dealer}
 	act, _ := bot.getOpenPosition(context.Background(), giveSide)

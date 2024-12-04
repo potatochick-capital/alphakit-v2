@@ -39,7 +39,7 @@ func Example() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	priceSamples := map[AssetID][]market.Kline{"btc": btc, "eth": eth}
+	priceSamples := map[AssetId][]market.Kline{"btc": btc, "eth": eth}
 
 	// Create a new brute style optimizer with a default simulated dealer (no broker costs)
 	// The default optimization objective is the param set with the highest sharpe ratio
@@ -69,7 +69,7 @@ func Example() {
 	optimaPSet := study.Validation[0]
 	fmt.Printf("Optima params: fast: %d slow: %d MMI: %d\n",
 		optimaPSet.Params["mafastlength"], optimaPSet.Params["maslowlength"], optimaPSet.Params["mmilength"])
-	optimaResult := study.ValidationResults[optimaPSet.ID]
+	optimaResult := study.ValidationResults[optimaPSet.Id]
 	fmt.Printf("Optima sharpe ratio is %.1f", optimaResult.Sharpe)
 
 	// Output:

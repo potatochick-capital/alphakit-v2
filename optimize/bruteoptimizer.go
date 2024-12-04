@@ -82,7 +82,7 @@ func NewBruteOptimizer() BruteOptimizer {
 
 // Prepare prepares a study based on the given param ranges and price data samples.
 // Returned is the estimated number of trials to be performed.
-func (o *BruteOptimizer) Prepare(in ParamMap, samples map[AssetID][]market.Kline) (int, error) {
+func (o *BruteOptimizer) Prepare(in ParamMap, samples map[AssetId][]market.Kline) (int, error) {
 
 	products := CartesianBuilder(in)
 	for i := range products {
@@ -109,8 +109,8 @@ func (o *BruteOptimizer) Start(ctx context.Context) (<-chan OptimizerTrial, erro
 	outCh := make(chan OptimizerTrial)
 
 	// Helper to append results to each phase
-	appendResult := func(phase Phase, results map[ParamSetID]PhaseReport, pset ParamSet, backtest perf.PerformanceReport) {
-		report, ok := results[pset.ID]
+	appendResult := func(phase Phase, results map[ParamSetId]PhaseReport, pset ParamSet, backtest perf.PerformanceReport) {
+		report, ok := results[pset.Id]
 		if !ok {
 			report = NewReport()
 			report.Subject = pset
@@ -118,7 +118,7 @@ func (o *BruteOptimizer) Start(ctx context.Context) (<-chan OptimizerTrial, erro
 		}
 		backtest.Properties = pset.Params
 		report.Trials = append(report.Trials, backtest)
-		results[pset.ID] = report
+		results[pset.Id] = report
 	}
 
 	go func() {
@@ -169,7 +169,7 @@ func (o *BruteOptimizer) Start(ctx context.Context) (<-chan OptimizerTrial, erro
 			}
 			appendResult(Validation, o.study.ValidationResults, step.PSet, step.Result)
 		}
-		o.study.ValidationResults[optima.ID] = Summarize(o.study.ValidationResults[optima.ID])
+		o.study.ValidationResults[optima.Id] = Summarize(o.study.ValidationResults[optima.Id])
 	}()
 
 	return outCh, nil
@@ -180,7 +180,7 @@ func (o *BruteOptimizer) Study() *Study {
 	return o.study
 }
 
-func (o *BruteOptimizer) enqueueJobs(pSets []ParamSet, samples map[AssetID][]market.Kline) <-chan bruteOptimizerJob {
+func (o *BruteOptimizer) enqueueJobs(pSets []ParamSet, samples map[AssetId][]market.Kline) <-chan bruteOptimizerJob {
 
 	// A buffered channel enables us to enqueue jobs and close the channel in a single function to simplify the call flow
 	// Without a buffer the loop would block awaiting a ready receiver for the jobs

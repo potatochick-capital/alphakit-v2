@@ -37,9 +37,9 @@ var _summaryReportHeader = []string{
 //
 // - TradeReport reports metrics related to the discrete roundturns (aka roundrtrip / roundturn).
 //
-//-  PorfolioReport reports metrics related to the portfolio equity curve.
+// -  PorfolioReport reports metrics related to the portfolio equity curve.
 type PerformanceReport struct {
-	ID              string           `csv:"id"`
+	Id              string           `csv:"id"`
 	Asset           market.Asset     `csv:"asset_,inline"`
 	TradeReport     *TradeReport     `csv:",inline"`
 	PortfolioReport *PortfolioReport `csv:",inline"`
@@ -49,7 +49,7 @@ type PerformanceReport struct {
 // NewPerformanceReport creates a new PerformanceReport.
 func NewPerformanceReport(roundturns []broker.RoundTurn, equity broker.EquitySeries) PerformanceReport {
 	return PerformanceReport{
-		ID:              string(id.New()),
+		Id:              string(id.New()),
 		TradeReport:     NewTradeReport(roundturns),
 		PortfolioReport: NewPortfolioReport(equity),
 		Properties:      make(map[string]any),

@@ -36,7 +36,7 @@ func (p Phase) MarshalText() ([]byte, error) {
 
 // Optimizer is the interface for an optimization method.
 type Optimizer interface {
-	Prepare(ParamMap, map[AssetID][]market.Kline) (int, error)
+	Prepare(ParamMap, map[AssetId][]market.Kline) (int, error)
 	Start(context.Context) (<-chan OptimizerTrial, error)
 	Study() *Study
 }
