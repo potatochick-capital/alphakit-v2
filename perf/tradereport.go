@@ -42,8 +42,8 @@ type TradeReport struct {
 
 	RoundTurns []broker.RoundTurn `csv:"-"`
 
-	winningCount, winningPct float64
-	losingCount, losingPct   float64
+	WinningCount, WinningPct float64
+	LosingCount, LosingPct   float64
 }
 
 // NewTradeReport creates a new TradeReport from a sequence of roundturns.
@@ -68,14 +68,14 @@ func NewTradeReport(roundturns []broker.RoundTurn) *TradeReport {
 		profits[i] = profit
 		switch {
 		case profit > 0:
-			report.winningCount++
+			report.WinningCount++
 			report.GrossProfit += profit
 			if lossStreak > report.MaxLossStreak {
 				report.MaxLossStreak = lossStreak
 			}
 			lossStreak = 0
 		case profit < 0:
-			report.losingCount++
+			report.LosingCount++
 			report.GrossLoss += math.Abs(profit)
 			lossStreak++
 		}
@@ -83,23 +83,23 @@ func NewTradeReport(roundturns []broker.RoundTurn) *TradeReport {
 	report.MaxProfit = floats.Max(profits)
 	report.MaxLoss = math.Abs(floats.Min(profits))
 
-	report.RoundTurnCount = report.winningCount + report.losingCount
+	report.RoundTurnCount = report.WinningCount + report.LosingCount
 
 	report.TotalNetProfit = report.GrossProfit - report.GrossLoss
 	report.AvgNetProfit = report.TotalNetProfit / report.RoundTurnCount
 	report.ProfitFactor = report.GrossProfit / num.NNZ(report.GrossLoss, 1)
-	report.PRR = PRR(report.GrossProfit, report.GrossLoss, report.winningCount, report.losingCount)
+	report.PRR = PRR(report.GrossProfit, report.GrossLoss, report.WinningCount, report.LosingCount)
 
-	report.AvgProfit = report.GrossProfit / num.NNZ(report.winningCount, 1)
-	report.AvgLoss = report.GrossLoss / num.NNZ(report.losingCount, 1)
+	report.AvgProfit = report.GrossProfit / num.NNZ(report.WinningCount, 1)
+	report.AvgLoss = report.GrossLoss / num.NNZ(report.LosingCount, 1)
 
-	report.winningPct = report.winningCount / report.RoundTurnCount
-	report.losingPct = 1 - report.winningPct
-	report.PercentProfitable = report.winningPct
+	report.WinningPct = report.WinningCount / report.RoundTurnCount
+	report.LosingPct = 1 - report.WinningPct
+	report.PercentProfitable = report.WinningPct
 
 	report.AvgHoldSec = report.TotalTimeInMarketSec / report.RoundTurnCount
 
-	report.Kelly = KellyCriterion(report.ProfitFactor, report.winningPct)
+	report.Kelly = KellyCriterion(report.ProfitFactor, report.WinningPct)
 	report.OptimalF = OptimalF(profits)
 
 	report.StatN = StatN(profits)

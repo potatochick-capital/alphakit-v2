@@ -61,10 +61,10 @@ func TestTradeReport(t *testing.T) {
 		TotalTimeInMarketSec: 1296000,
 		AvgHoldSec:           324000,
 		StatN:                120,
-		winningCount:         2,
-		winningPct:           0.5,
-		losingCount:          2,
-		losingPct:            0.5,
+		WinningCount:         2,
+		WinningPct:           0.5,
+		LosingCount:          2,
+		LosingPct:            0.5,
 		RoundTurns:           give,
 	}
 
