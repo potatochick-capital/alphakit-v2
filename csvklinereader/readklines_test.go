@@ -1,7 +1,7 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
 
 import (
 	"testing"

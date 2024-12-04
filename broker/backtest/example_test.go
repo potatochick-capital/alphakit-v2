@@ -11,12 +11,13 @@ import (
 	"os"
 
 	"github.com/thecolngroup/alphakit/broker"
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/alphakit/perf"
 	"github.com/thecolngroup/gou/dec"
 )
 
-//nolint
+// nolint
 func Example() {
 	// Verbose error handling omitted for brevity
 
@@ -30,7 +31,7 @@ func Example() {
 	// Read a .csv file of historical prices (aka candlestick data)
 	file, _ := os.Open("testdata/BTCUSDT-1h-2021-Q1.csv")
 	defer file.Close()
-	reader := market.NewCSVKlineReader(csv.NewReader(file))
+	reader := csvklinereader.NewCSVKlineReader(csv.NewReader(file))
 
 	// Iterate prices sending each price interval to the backtest dealer
 	// When connected to a live exchange we would not be required to supply the price to the dealer!

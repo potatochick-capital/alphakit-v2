@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/thecolngroup/alphakit/cmd/studyrun/app"
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"github.com/thecolngroup/alphakit/trader"
 	"github.com/thecolngroup/alphakit/trader/hodl"
 	"github.com/thecolngroup/alphakit/trader/trend"
@@ -27,8 +27,8 @@ func run(args []string) error {
 			"hodl":        trader.MakeFromConfig(hodl.MakeBotFromConfig),
 			"trend.cross": trader.MakeFromConfig(trend.MakeCrossBotFromConfig),
 			"trend.apex":  trader.MakeFromConfig(trend.MakeApexBotFromConfig),
-			"binance":     market.MakeCSVKlineReader(market.NewBinanceCSVKlineReader),
-			"metatrader":  market.MakeCSVKlineReader(market.NewMetaTraderCSVKlineReader),
+			"binance":     csvklinereader.MakeCSVKlineReader(csvklinereader.NewBinanceCSVKlineReader),
+			"metatrader":  csvklinereader.MakeCSVKlineReader(csvklinereader.NewMetaTraderCSVKlineReader),
 		},
 		app.BuildVersion{
 			GitTag:    buildGitTag,

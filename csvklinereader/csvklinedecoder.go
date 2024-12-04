@@ -1,7 +1,7 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
 
 import (
 	"encoding/csv"
@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/shopspring/decimal"
+	"github.com/thecolngroup/alphakit/market"
 )
 
 // MetaTraderTimeFormat is the time format expected by the MetaTrader decoder when cols [0] and [1] are used.
@@ -31,7 +32,7 @@ var (
 )
 
 // CSVKlineDecoder is an extension point for CSVKlineReader to support custom file formats.
-type CSVKlineDecoder func(record []string) (Kline, error)
+type CSVKlineDecoder func(record []string) (market.Kline, error)
 
 // NewBinanceCSVKlineReader creates a new CSVKlineReader for Binance CSV files.
 func NewBinanceCSVKlineReader(csv *csv.Reader) *CSVKlineReader {
@@ -42,8 +43,8 @@ func NewBinanceCSVKlineReader(csv *csv.Reader) *CSVKlineReader {
 }
 
 // BinanceCSVKlineDecoder decodes a CSV record from Binance into a Kline.
-func BinanceCSVKlineDecoder(record []string) (Kline, error) {
-	var k, empty Kline
+func BinanceCSVKlineDecoder(record []string) (market.Kline, error) {
+	var k, empty market.Kline
 	var err error
 
 	if len(record) < 5 {
@@ -88,8 +89,8 @@ func NewMetaTraderCSVKlineReader(csv *csv.Reader) *CSVKlineReader {
 }
 
 // MetaTraderCSVKlineDecoder decodes a CSV record from MetaTrader into a Kline.
-func MetaTraderCSVKlineDecoder(record []string) (Kline, error) {
-	var k, empty Kline
+func MetaTraderCSVKlineDecoder(record []string) (market.Kline, error) {
+	var k, empty market.Kline
 	var err error
 
 	if len(record) < 6 {

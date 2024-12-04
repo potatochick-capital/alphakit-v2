@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/alphakit/trader/trend"
 )
@@ -30,11 +31,11 @@ func Example() {
 	}
 
 	// Read price samples to use for optimization
-	btc, err := market.ReadKlinesFromCSV("./testdata/BTCUSDT-1H/")
+	btc, err := csvklinereader.ReadKlinesFromCSV("./testdata/BTCUSDT-1H/")
 	if err != nil {
 		log.Fatal(err)
 	}
-	eth, err := market.ReadKlinesFromCSV("./testdata/ETHUSDT-1H/")
+	eth, err := csvklinereader.ReadKlinesFromCSV("./testdata/ETHUSDT-1H/")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,25 +1,28 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
 
 import (
 	"encoding/csv"
 	"io/fs"
 	"os"
 	"path/filepath"
+
+	"github.com/thecolngroup/alphakit/market"
 )
 
 // ReadKlinesFromCSV reads all the .csv files in a given directory or a single file into a slice of Klines.
 // Wraps a default CSVKlineReader with Binance decoder for convenience.
 // For finer grained memory management use the base kline reader.
-func ReadKlinesFromCSV(path string) ([]Kline, error) {
+func ReadKlinesFromCSV(path string) ([]market.Kline, error) {
 	return ReadKlinesFromCSVWithDecoder(path, MakeCSVKlineReader(NewBinanceCSVKlineReader))
 }
 
 // ReadKlinesFromCSVWithDecoder permits using a custom CSVKlineReader.
-func ReadKlinesFromCSVWithDecoder(path string, maker MakeCSVKlineReader) ([]Kline, error) {
-	var prices []Kline
+func ReadKlinesFromCSVWithDecoder(path string, maker MakeCSVKlineReader) ([]market.Kline, error) {
+
+	var prices []market.Kline
 
 	err := filepath.WalkDir(path, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {

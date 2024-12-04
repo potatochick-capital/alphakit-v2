@@ -1,10 +1,12 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
+
+import "github.com/thecolngroup/alphakit/market"
 
 // KlineReader is an interface for reading candlesticks.
 type KlineReader interface {
-	Read() (Kline, error)
-	ReadAll() ([]Kline, error)
+	Read() (market.Kline, error)
+	ReadAll() ([]market.Kline, error)
 }

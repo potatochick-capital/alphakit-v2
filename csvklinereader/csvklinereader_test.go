@@ -1,7 +1,7 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
 
 import (
 	"encoding/csv"
@@ -10,10 +10,11 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/gou/dec"
 )
 
-var assertKlineEq = func(t *testing.T, exp, act Kline) {
+var assertKlineEq = func(t *testing.T, exp, act market.Kline) {
 	assert.Equal(t, exp.Start, act.Start)
 	assert.True(t, exp.O.Equal(act.O))
 	assert.True(t, exp.H.Equal(act.H))
@@ -26,13 +27,13 @@ func TestCSVKlineReader_ReadWithBinanceDecoder(t *testing.T) {
 	tests := []struct {
 		name string
 		give string
-		want Kline
+		want market.Kline
 		err  error
 	}{
 		{
 			name: "Read DOHLCV",
 			give: "1609459200000,28923.63000000,29031.34000000,28690.17000000,28995.13000000,2311.81144500",
-			want: Kline{
+			want: market.Kline{
 				Start:  time.UnixMilli(1609459200000).UTC(),
 				O:      dec.New(28923.63),
 				H:      dec.New(29031.34),
@@ -44,7 +45,7 @@ func TestCSVKlineReader_ReadWithBinanceDecoder(t *testing.T) {
 		{
 			name: "Read DOHLC",
 			give: "1609459200000,28923.63000000,29031.34000000,28690.17000000,28995.13000000",
-			want: Kline{
+			want: market.Kline{
 				Start:  time.UnixMilli(1609459200000).UTC(),
 				O:      dec.New(28923.63),
 				H:      dec.New(29031.34),
@@ -56,25 +57,25 @@ func TestCSVKlineReader_ReadWithBinanceDecoder(t *testing.T) {
 		{
 			name: "Not enough columns",
 			give: "1609459200000,28923.63000000,29031.34000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrNotEnoughColumns,
 		},
 		{
 			name: "Invalid time format",
 			give: "23/12/2021,28923.63000000,29031.34000000,28690.17000000,28995.13000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidTimeFormat,
 		},
 		{
 			name: "Invalid price format",
 			give: "1609459200000,sixty,29031.34000000,28690.17000000,28995.13000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidPriceFormat,
 		},
 		{
 			name: "Invalid volume format",
 			give: "1609459200000,28923.63000000,29031.34000000,28690.17000000,28995.13000000,vol",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidVolumeFormat,
 		},
 	}
@@ -105,13 +106,13 @@ func TestCSVKlineReader_ReadWithMetaTraderDecoder(t *testing.T) {
 	tests := []struct {
 		name string
 		give string
-		want Kline
+		want market.Kline
 		err  error
 	}{
 		{
 			name: "Read DOHLCV",
 			give: "11/12/2008;16:00;779.527679;780.964756;777.527679;779.964756;5",
-			want: Kline{
+			want: market.Kline{
 				Start:  time.Date(2008, 12, 11, 16, 0, 0, 0, time.UTC),
 				O:      dec.New(779.527679),
 				H:      dec.New(780.964756),
@@ -123,25 +124,25 @@ func TestCSVKlineReader_ReadWithMetaTraderDecoder(t *testing.T) {
 		{
 			name: "Not enough columns",
 			give: "1609459200000;28923.63000000;29031.34000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrNotEnoughColumns,
 		},
 		{
 			name: "Invalid time format",
 			give: "23/12/2021;t;28923.63000000;29031.34000000;28690.17000000;28995.13000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidTimeFormat,
 		},
 		{
 			name: "Invalid price format",
 			give: "11/12/2008;00:00;sixty;29031.34000000;28690.17000000;28995.13000000",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidPriceFormat,
 		},
 		{
 			name: "Invalid volume format",
 			give: "11/12/2008;00:00;779.527679;780.964756;777.527679;779.964756;vol",
-			want: Kline{},
+			want: market.Kline{},
 			err:  ErrInvalidVolumeFormat,
 		},
 	}

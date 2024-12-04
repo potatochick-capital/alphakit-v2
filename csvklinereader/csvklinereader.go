@@ -1,11 +1,13 @@
 // Copyright 2022 The Coln Group Ltd
 // SPDX-License-Identifier: MIT
 
-package market
+package csvklinereader
 
 import (
 	"encoding/csv"
 	"io"
+
+	"github.com/thecolngroup/alphakit/market"
 )
 
 var _ KlineReader = (*CSVKlineReader)(nil)
@@ -36,8 +38,8 @@ func NewCSVKlineReaderWithDecoder(csv *csv.Reader, decoder CSVKlineDecoder) *CSV
 }
 
 // Read reads the next Kline from the underlying CSV data.
-func (r *CSVKlineReader) Read() (Kline, error) {
-	var k Kline
+func (r *CSVKlineReader) Read() (market.Kline, error) {
+	var k market.Kline
 
 	rec, err := r.csv.Read()
 	if err != nil {
@@ -48,8 +50,8 @@ func (r *CSVKlineReader) Read() (Kline, error) {
 }
 
 // ReadAll reads all the Klines from the underlying CSV data.
-func (r *CSVKlineReader) ReadAll() ([]Kline, error) {
-	var ks []Kline
+func (r *CSVKlineReader) ReadAll() ([]market.Kline, error) {
+	var ks []market.Kline
 	for {
 		k, err := r.Read()
 		if err == io.EOF {

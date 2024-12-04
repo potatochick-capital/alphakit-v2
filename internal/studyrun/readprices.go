@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/alphakit/optimize"
 	"github.com/thecolngroup/gou/conv"
@@ -33,11 +34,11 @@ func readPricesFromConfig(config map[string]any, typeRegistry map[string]any) (m
 		if _, ok := typeRegistry[decoder]; !ok {
 			return nil, fmt.Errorf("'%s' key not found in type registry", decoder)
 		}
-		maker := typeRegistry[decoder].(market.MakeCSVKlineReader)
+		maker := typeRegistry[decoder].(csvklinereader.MakeCSVKlineReader)
 
 		// Load path to price files from config
 		path := cfg["path"].(string)
-		series, err := market.ReadKlinesFromCSVWithDecoder(path, maker)
+		series, err := csvklinereader.ReadKlinesFromCSVWithDecoder(path, maker)
 		if err != nil {
 			return nil, err
 		}

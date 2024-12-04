@@ -11,6 +11,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/thecolngroup/alphakit/broker/backtest"
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/alphakit/money"
 	"github.com/thecolngroup/alphakit/perf"
@@ -45,7 +46,7 @@ func TestBotWithCrossPredicter(t *testing.T) {
 		assert.NoError(t, file.Close())
 	}()
 
-	prices, _ := market.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
+	prices, _ := csvklinereader.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
 	for _, price := range prices {
 		if err := dealer.ReceivePrice(context.Background(), price); err != nil {
 			t.Fatal(err)

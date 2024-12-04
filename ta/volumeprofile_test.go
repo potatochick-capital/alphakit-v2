@@ -11,7 +11,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/thecolngroup/alphakit/csvklinereader"
 	"golang.org/x/exp/slices"
 )
 
@@ -24,7 +24,7 @@ func TestMarketProfileWithPriceFile(t *testing.T) {
 		assert.NoError(t, file.Close())
 	}()
 
-	prices, err := market.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
+	prices, err := csvklinereader.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
 	assert.NoError(t, err)
 	var levels []VolumeLevel
 	for i := range prices {
@@ -61,7 +61,7 @@ func TestVolumeProfile_FixedBinWidth(t *testing.T) {
 		assert.NoError(t, file.Close())
 	}()
 
-	prices, err := market.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
+	prices, err := csvklinereader.NewCSVKlineReader(csv.NewReader(file)).ReadAll()
 	assert.NoError(t, err)
 	var levels []VolumeLevel
 	for i := range prices {
