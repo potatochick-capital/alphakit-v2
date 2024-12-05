@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/potatochick-capital/alphakit-v2/csvklinereader"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/csvklinereader"
 	"golang.org/x/exp/slices"
 )
 

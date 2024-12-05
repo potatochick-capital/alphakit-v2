@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/olekukonko/tablewriter"
-	"github.com/thecolngroup/alphakit/optimize"
+	"github.com/potatochick-capital/alphakit-v2/optimize"
 	"github.com/thecolngroup/gou/conv"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"

@@ -6,10 +6,10 @@ package dbklinereader
 import (
 	"time"
 
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 // KlineReader is an interface for reading candlesticks.
 type KlineReader interface {
-	ReadAll(startDate time.Time, endDate time.Time, assetsId uint64) (map[uint64][]market.Kline, error)
+	ReadAll(startDate time.Time, endDate time.Time, assetsId uint64) (map[uint64][]*market.Kline, error)
 }

@@ -7,7 +7,7 @@ import (
 	"encoding/csv"
 	"io"
 
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 var _ KlineReader = (*CSVKlineReader)(nil)

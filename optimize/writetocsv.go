@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/perf"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/perf"
 	"github.com/thecolngroup/gou/csv"
 )
 

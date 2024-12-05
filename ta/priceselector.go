@@ -4,8 +4,8 @@
 package ta
 
 import (
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
 )
 
 // PriceSelector is a selector that returns a price value for the given kline.

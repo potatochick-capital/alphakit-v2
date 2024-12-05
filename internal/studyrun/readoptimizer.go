@@ -7,8 +7,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/thecolngroup/alphakit/optimize"
-	"github.com/thecolngroup/alphakit/trader"
+	"github.com/potatochick-capital/alphakit-v2/optimize"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/thecolngroup/gou/conv"
 )
 

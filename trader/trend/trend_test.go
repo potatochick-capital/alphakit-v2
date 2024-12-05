@@ -9,14 +9,14 @@ import (
 	"os"
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/broker/backtest"
+	"github.com/potatochick-capital/alphakit-v2/csvklinereader"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/money"
+	"github.com/potatochick-capital/alphakit-v2/perf"
+	"github.com/potatochick-capital/alphakit-v2/risk"
+	"github.com/potatochick-capital/alphakit-v2/ta"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/broker/backtest"
-	"github.com/thecolngroup/alphakit/csvklinereader"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/money"
-	"github.com/thecolngroup/alphakit/perf"
-	"github.com/thecolngroup/alphakit/risk"
-	"github.com/thecolngroup/alphakit/ta"
 	"github.com/thecolngroup/gou/dec"
 )
 

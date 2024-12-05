@@ -6,8 +6,8 @@ package ta
 import (
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/market"
 	"github.com/thecolngroup/gou/dec"
 )
 

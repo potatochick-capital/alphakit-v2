@@ -3,7 +3,7 @@
 
 package trader
 
-import "github.com/thecolngroup/alphakit/market"
+import "github.com/potatochick-capital/alphakit-v2/market"
 
 // Predicter is used by a bot to indicate price direction.
 // Child packages provide specific prediction implementations.

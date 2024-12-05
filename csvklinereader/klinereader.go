@@ -3,7 +3,7 @@
 
 package csvklinereader
 
-import "github.com/thecolngroup/alphakit/market"
+import "github.com/potatochick-capital/alphakit-v2/market"
 
 // KlineReader is an interface for reading candlesticks.
 type KlineReader interface {

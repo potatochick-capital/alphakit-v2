@@ -6,9 +6,9 @@ package risk
 import (
 	"context"
 
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/ta"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/ta"
 	"github.com/thecolngroup/gou/dec"
 )
 

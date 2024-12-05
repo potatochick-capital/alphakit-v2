@@ -4,7 +4,7 @@
 package ta
 
 import (
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 var _ Indicator[market.Kline] = (*VWAP)(nil)

@@ -6,8 +6,8 @@ package trader
 import (
 	"context"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 var _ Bot = (*StubBot)(nil)

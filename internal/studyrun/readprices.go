@@ -7,9 +7,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/thecolngroup/alphakit/csvklinereader"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/optimize"
+	"github.com/potatochick-capital/alphakit-v2/csvklinereader"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/optimize"
 	"github.com/thecolngroup/gou/conv"
 )
 

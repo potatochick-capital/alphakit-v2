@@ -10,11 +10,11 @@ import (
 	"runtime"
 
 	"github.com/gammazero/workerpool"
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/broker/backtest"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/perf"
-	"github.com/thecolngroup/alphakit/trader"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/broker/backtest"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/perf"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 )

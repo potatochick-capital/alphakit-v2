@@ -6,8 +6,8 @@
 package risk
 
 import (
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
 )
 
 // Risker is an interface that defines the methods needed to evaluate trade risk.

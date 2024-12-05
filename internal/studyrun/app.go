@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/potatochick-capital/alphakit-v2/optimize"
 	"github.com/schollz/progressbar/v3"
-	"github.com/thecolngroup/alphakit/optimize"
 	"golang.org/x/exp/maps"
 )
 

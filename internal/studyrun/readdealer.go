@@ -7,8 +7,8 @@ package studyrun
 import (
 	"errors"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/broker/backtest"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/broker/backtest"
 )
 
 // readDealerFromConfig creates a new simulated dealer from a config file params.

@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
 )
 
 // MetaTraderTimeFormat is the time format expected by the MetaTrader decoder when cols [0] and [1] are used.

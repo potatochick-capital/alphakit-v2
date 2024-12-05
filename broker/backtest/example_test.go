@@ -10,10 +10,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/csvklinereader"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/perf"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/csvklinereader"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/perf"
 	"github.com/thecolngroup/gou/dec"
 )
 

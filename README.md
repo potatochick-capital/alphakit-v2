@@ -10,7 +10,7 @@ __!! Alphakit is now archived and is not maintained. See other repos in the org 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/gomods/athens.svg)](https://github.com/gomods/athens)
 [![Go Report Card](https://goreportcard.com/badge/github.com/thecolngroup/alphakit)](https://goreportcard.com/report/github.com/thecolngroup/alphakit)
-[![Go](https://github.com/thecolngroup/alphakit/actions/workflows/go.yml/badge.svg)](https://github.com/thecolngroup/alphakit/actions/workflows/go.yml)
+[![Go](https://github.com/potatochick-capital/alphakit-v2/actions/workflows/go.yml/badge.svg)](https://github.com/potatochick-capital/alphakit-v2/actions/workflows/go.yml)
 
 Introducing a framework for algorithmic trading in Go and serverless cloud
 
@@ -209,7 +209,7 @@ If you wish to use your own custom bots or price data decoders with the command 
 
 The command app will execute an optimization study using `BruteOptimizer` and dump out the results in .csv format.
 
-If you wish to execute the `studyrun` process from outside Alphakit, an entrypoint function is availble in the package `github.com/thecolngroup/alphakit/cmd/studyrun/app`.
+If you wish to execute the `studyrun` process from outside Alphakit, an entrypoint function is availble in the package `github.com/potatochick-capital/alphakit-v2/cmd/studyrun/app`.
 
 ## Connecting to a live trading venue
 

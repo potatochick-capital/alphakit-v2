@@ -4,7 +4,7 @@
 package hodl
 
 import (
-	"github.com/thecolngroup/alphakit/trader"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/thecolngroup/gou/conv"
 )
 

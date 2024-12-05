@@ -6,9 +6,9 @@ package trend
 import (
 	"context"
 
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/ta"
-	"github.com/thecolngroup/alphakit/trader"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/ta"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 )
 
 var _ trader.Predicter = (*ApexPredicter)(nil)

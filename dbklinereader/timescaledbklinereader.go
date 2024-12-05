@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
 )
 
 type TimescaleKlineReader struct {
@@ -32,8 +32,7 @@ func (r *TimescaleKlineReader) Close() {
 	r.pool.Close()
 }
 
-func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uint64) (map[uint64][]market.Kline, error) {
-	// Define the time frames and their corresponding table names
+func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uint64) (map[uint64][]*market.Kline, error) {
 	timeFrames := map[uint64]string{
 		1:     "bar_1s",
 		60:    "bar_1m",
@@ -44,25 +43,23 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
 		86400: "bar_1d",
 	}
 
-	// Result map to store klines for each time frame
-	result := make(map[uint64][]market.Kline)
+	result := make(map[uint64][]*market.Kline)
 
-	// Query each time frame
 	for timeFrame, tableName := range timeFrames {
 		query := fmt.Sprintf(`
-			SELECT 
-				bar_time,
-				open,
-				high,
-				low,
-				close,
-				volume
-			FROM price_data.%s
-			WHERE 
-				asset_id = $1 AND 
-				bar_time BETWEEN $2 AND $3
-			ORDER BY bar_time
-		`, tableName)
+            SELECT 
+                bar_time,
+                open,
+                high,
+                low,
+                close,
+                volume
+            FROM price_data.%s
+            WHERE 
+                asset_id = $1 AND 
+                bar_time BETWEEN $2 AND $3
+            ORDER BY bar_time
+        `, tableName)
 
 		rows, err := r.pool.Query(context.Background(), query, assetID, startDate, endDate)
 		if err != nil {
@@ -70,9 +67,9 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
 		}
 		defer rows.Close()
 
-		var klines []market.Kline
+		var klines []*market.Kline
 		for rows.Next() {
-			var k market.Kline
+			k := &market.Kline{}
 			var openDecimal, highDecimal, lowDecimal, closeDecimal decimal.Decimal
 
 			err := rows.Scan(
@@ -87,7 +84,6 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
 				return nil, fmt.Errorf("error scanning row from %s: %w", tableName, err)
 			}
 
-			// Convert decimal.Decimal to Kline struct
 			k.O = openDecimal
 			k.H = highDecimal
 			k.L = lowDecimal
@@ -100,7 +96,6 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
 			return nil, fmt.Errorf("error after scanning rows from %s: %w", tableName, err)
 		}
 
-		// Only add to result if there are klines
 		if len(klines) > 0 {
 			result[timeFrame] = klines
 		}

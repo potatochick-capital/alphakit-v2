@@ -7,11 +7,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/thecolngroup/alphakit/cmd/studyrun/app"
-	"github.com/thecolngroup/alphakit/csvklinereader"
-	"github.com/thecolngroup/alphakit/trader"
-	"github.com/thecolngroup/alphakit/trader/hodl"
-	"github.com/thecolngroup/alphakit/trader/trend"
+	"github.com/potatochick-capital/alphakit-v2/cmd/studyrun/app"
+	"github.com/potatochick-capital/alphakit-v2/csvklinereader"
+	"github.com/potatochick-capital/alphakit-v2/trader"
+	"github.com/potatochick-capital/alphakit-v2/trader/hodl"
+	"github.com/potatochick-capital/alphakit-v2/trader/trend"
 )
 
 func main() {

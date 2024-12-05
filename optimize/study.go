@@ -4,8 +4,8 @@
 package optimize
 
 import (
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/perf"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/perf"
 	"github.com/thecolngroup/gou/id"
 )
 

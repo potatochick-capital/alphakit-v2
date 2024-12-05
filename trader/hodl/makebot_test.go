@@ -6,8 +6,8 @@ package hodl
 import (
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/trader"
 )
 
 func TestMakeBotFromConfig(t *testing.T) {

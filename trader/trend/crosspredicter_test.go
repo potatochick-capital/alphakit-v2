@@ -7,9 +7,9 @@ import (
 	"context"
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/ta"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/ta"
 	"github.com/thecolngroup/gou/dec"
 	"github.com/thecolngroup/gou/num"
 )

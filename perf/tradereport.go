@@ -8,7 +8,7 @@ import (
 
 	"gonum.org/v1/gonum/floats"
 
-	"github.com/thecolngroup/alphakit/broker"
+	"github.com/potatochick-capital/alphakit-v2/broker"
 	"github.com/thecolngroup/gou/num"
 )
 

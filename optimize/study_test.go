@@ -6,8 +6,8 @@ package optimize
 import (
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/perf"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/perf"
 )
 
 func TestSummarize(t *testing.T) {

@@ -7,10 +7,10 @@ package backtest
 import (
 	"context"
 
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/web"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/web"
 )
 
 // Enforce at compile time that the type implements the interface

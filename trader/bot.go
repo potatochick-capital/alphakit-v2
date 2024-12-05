@@ -10,8 +10,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 // Bot is the primary interface for a trading algo.

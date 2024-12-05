@@ -1,4 +1,4 @@
-module github.com/thecolngroup/alphakit
+module github.com/potatochick-capital/alphakit-v2
 
 go 1.22
 

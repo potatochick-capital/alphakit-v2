@@ -4,7 +4,7 @@
 package backtest
 
 import (
-	"github.com/thecolngroup/alphakit/broker"
+	"github.com/potatochick-capital/alphakit-v2/broker"
 	"github.com/thecolngroup/gou/conv"
 	"github.com/thecolngroup/gou/dec"
 )

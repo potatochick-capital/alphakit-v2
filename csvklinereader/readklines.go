@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/thecolngroup/alphakit/market"
+	"github.com/potatochick-capital/alphakit-v2/market"
 )
 
 // ReadKlinesFromCSV reads all the .csv files in a given directory or a single file into a slice of Klines.

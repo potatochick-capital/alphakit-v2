@@ -9,8 +9,8 @@ package optimize
 import (
 	"context"
 
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/perf"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/perf"
 )
 
 // Phase is the phase of the optimization method.

@@ -7,11 +7,11 @@ import (
 	"context"
 	"testing"
 
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/perf"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/stretchr/testify/assert"
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/perf"
-	"github.com/thecolngroup/alphakit/trader"
 	"github.com/thecolngroup/gou/dec"
 	"golang.org/x/exp/maps"
 )

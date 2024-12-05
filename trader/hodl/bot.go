@@ -7,9 +7,9 @@ package hodl
 import (
 	"context"
 
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/trader"
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/thecolngroup/gou/dec"
 )
 

@@ -6,8 +6,8 @@ package risk
 import (
 	"context"
 
+	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/market"
 )
 
 // FullRisker assumes that the current price is the maximum downside risk.

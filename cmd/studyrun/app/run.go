@@ -4,7 +4,7 @@
 package app
 
 import (
-	"github.com/thecolngroup/alphakit/internal/studyrun"
+	"github.com/potatochick-capital/alphakit-v2/internal/studyrun"
 )
 
 // BuildVersion describes key info to identify the build of the app.

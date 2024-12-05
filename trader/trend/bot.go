@@ -7,12 +7,12 @@ package trend
 import (
 	"context"
 
+	"github.com/potatochick-capital/alphakit-v2/broker"
+	"github.com/potatochick-capital/alphakit-v2/market"
+	"github.com/potatochick-capital/alphakit-v2/money"
+	"github.com/potatochick-capital/alphakit-v2/risk"
+	"github.com/potatochick-capital/alphakit-v2/trader"
 	"github.com/shopspring/decimal"
-	"github.com/thecolngroup/alphakit/broker"
-	"github.com/thecolngroup/alphakit/market"
-	"github.com/thecolngroup/alphakit/money"
-	"github.com/thecolngroup/alphakit/risk"
-	"github.com/thecolngroup/alphakit/trader"
 	"github.com/thecolngroup/gou/dec"
 )
 

@@ -6,8 +6,8 @@ package broker
 import (
 	"context"
 
+	"github.com/potatochick-capital/alphakit-v2/web"
 	"github.com/stretchr/testify/mock"
-	"github.com/thecolngroup/alphakit/web"
 )
 
 var _ Dealer = (*MockDealer)(nil)
