@@ -14,6 +14,7 @@ type TimescaleKlineReader struct {
 	pool *pgxpool.Pool
 }
 
+// NewTimescaleKlineReader initializes a new TimescaleKlineReader with the provided connection URI.
 func NewTimescaleKlineReader(connectionURI string) (*TimescaleKlineReader, error) {
 	config, err := pgxpool.ParseConfig(connectionURI)
 	if err != nil {
@@ -28,11 +29,14 @@ func NewTimescaleKlineReader(connectionURI string) (*TimescaleKlineReader, error
 	return &TimescaleKlineReader{pool: pool}, nil
 }
 
+// Close gracefully closes the connection pool.
 func (r *TimescaleKlineReader) Close() {
 	r.pool.Close()
 }
 
-func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uint64) (map[uint64][]*market.Kline, error) {
+// ReadAll retrieves kline data for the specified asset ID and time range across different timeframes.
+func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetId uint64) (map[uint64][]*market.Kline, error) {
+	// Mapping of timeframe in seconds to their respective table name prefixes.
 	timeFrames := map[uint64]string{
 		1:     "bar_1s",
 		60:    "bar_1m",
@@ -45,7 +49,11 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
 
 	result := make(map[uint64][]*market.Kline)
 
-	for timeFrame, tableName := range timeFrames {
+	for timeFrame, tablePrefix := range timeFrames {
+		// Dynamically construct the table name based on the assetId.
+		tableName := fmt.Sprintf("price_data.%s_asset_%d", tablePrefix, assetId)
+
+		// Construct the SQL query with the dynamically generated table name.
 		query := fmt.Sprintf(`
             SELECT 
                 bar_time,
@@ -54,14 +62,14 @@ func (r *TimescaleKlineReader) ReadAll(startDate, endDate time.Time, assetID uin
                 low,
                 close,
                 volume
-            FROM price_data.%s
+            FROM %s
             WHERE 
-                asset_id = $1 AND 
-                bar_time BETWEEN $2 AND $3
+                bar_time BETWEEN $1 AND $2
             ORDER BY bar_time
         `, tableName)
 
-		rows, err := r.pool.Query(context.Background(), query, assetID, startDate, endDate)
+		// Execute the query with startDate and endDate as parameters.
+		rows, err := r.pool.Query(context.Background(), query, startDate, endDate)
 		if err != nil {
 			return nil, fmt.Errorf("error querying %s: %w", tableName, err)
 		}
