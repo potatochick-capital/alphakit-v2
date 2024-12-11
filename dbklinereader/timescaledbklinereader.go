@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/potatochick-capital/alphakit-v2/market"
 	"github.com/shopspring/decimal"
@@ -136,20 +137,20 @@ func (r *TimescaleKlineReader) fetchKlinesWithPaging(tableName string, startDate
 
 	for {
 		query := fmt.Sprintf(`
-            SELECT 
-                bar_time,
-                open,
-                high,
-                low,
-                close,
-                volume
-            FROM %s
-            WHERE 
-                bar_time > $1 AND 
-                bar_time <= $2
-            ORDER BY bar_time ASC
-            LIMIT %d
-        `, tableName, r.pageSize)
+             SELECT 
+                 bar_time,
+                 open,
+                 high,
+                 low,
+                 close,
+                 volume
+             FROM %s
+             WHERE 
+                 bar_time > $1 AND 
+                 bar_time <= $2
+             ORDER BY bar_time ASC
+             LIMIT %d
+         `, tableName, r.pageSize)
 
 		rows, err := r.pool.Query(context.Background(), query, lastTime, endDate)
 		if err != nil {
@@ -182,7 +183,7 @@ func (r *TimescaleKlineReader) fetchKlinesWithPaging(tableName string, startDate
 }
 
 // scanRows scans multiple rows and returns a slice of Kline pointers.
-func (r *TimescaleKlineReader) scanRows(rows pgxpool.Rows, tableName string) ([]*market.Kline, error) {
+func (r *TimescaleKlineReader) scanRows(rows pgx.Rows, tableName string) ([]*market.Kline, error) {
 	var klines []*market.Kline
 
 	for rows.Next() {
@@ -201,7 +202,7 @@ func (r *TimescaleKlineReader) scanRows(rows pgxpool.Rows, tableName string) ([]
 }
 
 // scanRow scans a single row into a Kline struct.
-func scanRow(rows pgxpool.Rows, tableName string) (*market.Kline, error) {
+func scanRow(rows pgx.Rows, tableName string) (*market.Kline, error) {
 	k := &market.Kline{}
 	var openDecimal, highDecimal, lowDecimal, closeDecimal decimal.Decimal
 
